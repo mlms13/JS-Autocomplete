@@ -127,9 +127,9 @@ function InputSuggestions(inputID, list) {
                 buildSuggestionBox(getFilteredItems(input.value)); // show suggestions if they aren't shown
                 changeSelection(key);
                 return false;
-            } else if (key === 13) { // return key should make a selection if the box is open
+            } else if (key === 13) { // return key should make a selection *if the box is open*
                 makeKeyboardSelection();
-                return false;
+                return false; // FIXME this should be preventing submission, right??
             } else if (key === 9 || key === 27) { // close box on tab or esc
                 suggestionBox.style.display = "none";
             }
