@@ -113,6 +113,9 @@ function InputSuggestions(inputID, list) {
         input = document.getElementById(self.inputID);
         parent = input.parentNode;
 
+        // turn off the browser's autocomplete menu so ours can shine through
+        input.setAttribute('autocomplete', 'off');
+
         suggestionBox.setAttribute('id', 'suggestion');
         suggestionBox.style.minWidth = (input.offsetWidth - 2) + 'px'; // -2px for border
         suggestionBox.style.left = input.offsetLeft + 'px';
