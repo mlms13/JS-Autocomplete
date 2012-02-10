@@ -1,0 +1,74 @@
+<!DOCTYPE html> 
+<!--[if lte IE 6]><html lang="en-us" class="no-js ie6"><![endif]--> 
+<!--[if IE 7]><html lang="en-us" class="no-js ie7"><![endif]--> 
+<!--[if IE 8]><html lang="en-us" class="no-js ie8"><![endif]--> 
+<!--[if IE 9]><html lang="en-us" class="no-js ie9"><![endif]--> 
+<!--[if gt IE 9]><!--><html lang="en-us" class="no-js"><!--<![endif]--> 
+    <head>
+        <title>Autocompletion Test</title>
+        <meta charset="utf-8" />
+        <style type="text/css">
+            body {
+                background: #bbb;
+                font-family: sans-serif;
+                font-size: 14px;
+                margin: 0;
+                padding: 0;
+            }
+            #container {
+                background: #fff;
+                margin: 0 auto;
+                width: 1000px;
+            }
+            #suggestion {
+                background: #fff;
+                border: 1px solid #aaa;
+                border-top: 0;
+                box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+                display: none;
+                padding: 0;
+                position: absolute;
+                text-align: left;
+            }
+            #suggestion ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+            #suggestion li {
+                cursor: default;
+                padding: 1px 6px;
+            }
+            #suggestion li.selected {
+                background: #4ad;
+                color: #fff;
+            }
+        </style>
+
+        <script type="text/javascript">
+            (function () {
+                var html = document.getElementsByTagName('html')[0];
+                html.className = html.className.replace('no-js', 'js');
+            }());
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <form action="#" method="get">
+                <label for="vegetable">Vegetable:</label>
+                <input type="text" name="name" id="vegetable" placeholder="e.g. Corn" />
+            </form>
+        </div>
+        <script type="text/javascript" src="./autocomplete.js"></script>
+        <script type="text/javascript">
+            (function () {
+                var list = ['arugula', 'asparagus', 'bell pepper', 'black bean', 'broccoli', 'carrot',
+                        'cauliflower', 'celery', 'corn', 'cucumber', 'eggplant', 'ginger', 'lima bean',
+                        'onion', 'potato', 'radish', 'snow pea', 'soybean', 'spinach' 'tomato', 'turnip', 'yam'],
+                    menu = new InputSuggestions('vegetable', list);
+
+                menu.initialize();
+            }());
+        </script>
+    </body>
+</html>
