@@ -132,7 +132,14 @@ function InputSuggestions(inputID, list) {
                 return false;
             } else if (key === 13) { // return key should make a selection *if the box is open*
                 makeKeyboardSelection();
-                return false; // FIXME this should be preventing submission, right??
+
+                // make sure the enter key doesn't submit the form
+                if (e && e.preventDefault) {
+                    e.preventDefault();
+                } else if (window.event) {
+                    window.event.returnValue = false;
+                }
+                return false;
             } else if (key === 9 || key === 27) { // close box on tab or esc
                 suggestionBox.style.display = "none";
             }
