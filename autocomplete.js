@@ -183,9 +183,3 @@ function InputSuggestions(inputID, list) {
         });
     }
 }
-/*
-var menu = new InputSuggestions();
-menu.list = ["corn", "beans", "avocado", "mango", "orange", "pear", "peas", "carrots", "milk", "cheese", "blueberries", "cucumbers", "butternut squash"];
-menu.inputID = "suggestion";
-menu.initialize();
-*/
