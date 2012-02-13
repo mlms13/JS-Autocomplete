@@ -67,7 +67,8 @@
                         'onion', 'potato', 'radish', 'snow pea', 'soybean', 'spinach', 'tomato', 'turnip', 'yam'],
                     menu = new InputSuggestions({
                         inputID: 'veg',
-                        list: vegetables
+                        list: vegetables,
+                        maxItems: 10 // suggestion box remains hidden until the filtered list contains this number of items or fewer
                     });
 
                 menu.initialize();

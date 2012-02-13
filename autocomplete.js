@@ -7,6 +7,7 @@ function InputSuggestions(settings) {
 
     this.list = settings.list || []; // this is the list of strings to filter on text input
     this.inputID = settings.inputID || ''; // the id of the text input
+    this.maxItems = settings.maxItems || 20; // don't show suggestions of more than this number of items remain
 
     function addEvent(element, eventName, func) {
         if (element.addEventListener) {
@@ -37,7 +38,7 @@ function InputSuggestions(settings) {
             item,
             i = 0;
 
-        if (suggestions.length < 1) {
+        if (suggestions.length < 1 || suggestions.length > self.maxItems) {
             return;
         }
 
