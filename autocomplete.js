@@ -30,6 +30,10 @@ function InputSuggestions(settings) {
         }
         return [posLeft, posTop];
     }
+    function closeSuggestionBox() {
+        suggestionBox.style.display = "none";
+        selectedIndex = -1;
+    }
 
     function buildSuggestionBox(suggestions) {
         var list = document.createElement('ul'),
@@ -66,7 +70,7 @@ function InputSuggestions(settings) {
             return function () {
                 input.value = item.childNodes[0].nodeValue;
                 input.focus();
-                closeSelectionBox();
+                closeSuggestionBox();
             };
         }
 
@@ -109,23 +113,19 @@ function InputSuggestions(settings) {
         items[nextIndex].className += ' selected';
         selectedIndex = nextIndex;
     }
-    function closeSelectionBox() {
-        suggestionBox.style.display = "none";
-        selectedIndex = -1;
-    }
 
     function makeKeyboardSelection() {
         var items = suggestionBox.getElementsByTagName('li');
 
         if (selectedIndex > -1) {
             input.value = items[selectedIndex].childNodes[0].nodeValue;
-            closeSelectionBox();
+            closeSuggestionBox();
         }
     }
-    
+
     this.initialize = function () {
         var trueOffset;
-        
+
         html = document.getElementsByTagName('html')[0];
         input = document.getElementById(self.inputID);
         trueOffset = getInputOffset();
@@ -158,7 +158,7 @@ function InputSuggestions(settings) {
                 }
                 return false;
             } else if (key === 9 || key === 27) { // close box on tab or esc
-                closeSelectionBox();
+                closeSuggestionBox();
             }
         });
 
@@ -172,15 +172,15 @@ function InputSuggestions(settings) {
                     return;
                 }
             }
-            
-            closeSelectionBox();
+
+            closeSuggestionBox();
             if (input.value !== null && input.value !== "") {
                 buildSuggestionBox(getFilteredItems(input.value));
             }
         });
-        
+
         addEvent(html, 'click', function () {
-            closeSelectionBox();
+            closeSuggestionBox();
         });
-    }
+    };
 }
