@@ -67,8 +67,7 @@ function InputSuggestions(inputID, list) {
             return function () {
                 input.value = item.childNodes[0].nodeValue;
                 input.focus();
-                suggestionBox.style.display = "none";
-                selectedIndex = -1;
+                closeSelectionBox();
             };
         }
 
@@ -111,14 +110,17 @@ function InputSuggestions(inputID, list) {
         items[nextIndex].className += ' selected';
         selectedIndex = nextIndex;
     }
+    function closeSelectionBox() {
+        suggestionBox.style.display = "none";
+        selectedIndex = -1;
+    }
 
     function makeKeyboardSelection() {
         var items = suggestionBox.getElementsByTagName('li');
 
         if (selectedIndex > -1) {
             input.value = items[selectedIndex].childNodes[0].nodeValue;
-            suggestionBox.style.display = "none";
-            selectedIndex = -1;
+            closeSelectionBox();
         }
     }
     
@@ -157,7 +159,7 @@ function InputSuggestions(inputID, list) {
                 }
                 return false;
             } else if (key === 9 || key === 27) { // close box on tab or esc
-                suggestionBox.style.display = "none";
+                closeSelectionBox();
             }
         });
 
@@ -172,14 +174,14 @@ function InputSuggestions(inputID, list) {
                 }
             }
             
-            suggestionBox.style.display = "none";
+            closeSelectionBox();
             if (input.value !== null && input.value !== "") {
                 buildSuggestionBox(getFilteredItems(input.value));
             }
         });
         
         addEvent(html, 'click', function () {
-            suggestionBox.style.display = "none";
+            closeSelectionBox();
         });
     }
 }
