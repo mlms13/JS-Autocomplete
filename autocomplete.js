@@ -1,12 +1,12 @@
-function InputSuggestions(inputID, list) {
+function InputSuggestions(settings) {
     var self = this,
         html,
         suggestionBox = document.createElement('div'),
         input,
         selectedIndex = -1;
 
-    this.list = list || []; // this is the list of strings to filter on text input
-    this.inputID = inputID || ''; // the id of the text input
+    this.list = settings.list || []; // this is the list of strings to filter on text input
+    this.inputID = settings.inputID || ''; // the id of the text input
 
     function addEvent(element, eventName, func) {
         if (element.addEventListener) {

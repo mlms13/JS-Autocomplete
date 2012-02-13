@@ -55,17 +55,20 @@
     <body>
         <div id="container">
             <form action="#" method="get">
-                <label for="vegetable">Vegetable:</label>
-                <input type="text" name="name" id="vegetable" placeholder="e.g. Corn" />
+                <label for="veg">Vegetable:</label>
+                <input type="text" name="name" id="veg" placeholder="e.g. Corn" />
             </form>
         </div>
         <script type="text/javascript" src="./autocomplete.js"></script>
         <script type="text/javascript">
             (function () {
-                var list = ['arugula', 'asparagus', 'bell pepper', 'black bean', 'broccoli', 'carrot',
+                var vegetables = ['arugula', 'asparagus', 'bell pepper', 'black bean', 'broccoli', 'carrot',
                         'cauliflower', 'celery', 'corn', 'cucumber', 'eggplant', 'ginger', 'lima bean',
                         'onion', 'potato', 'radish', 'snow pea', 'soybean', 'spinach', 'tomato', 'turnip', 'yam'],
-                    menu = new InputSuggestions('vegetable', list);
+                    menu = new InputSuggestions({
+                        inputID: 'veg',
+                        list: vegetables
+                    });
 
                 menu.initialize();
             }());
