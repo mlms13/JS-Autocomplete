@@ -15,6 +15,22 @@ function InputSuggestions(inputID, list) {
             element.attachEvent('on' + eventName, func);
         }
     }
+    function getInputOffset() {
+        var curInput = input,
+            posLeft = 0,
+            posTop = 0;
+
+        console.log(input.offsetLeft);
+        if (curInput.offsetParent) {
+            while (curInput) {
+                posLeft += curInput.offsetLeft;
+                posTop += curInput.offsetTop;
+                console.log('Position left is: ' + posLeft);
+                curInput = curInput.offsetParent;
+            }
+        }
+        return [posLeft, posTop];
+    }
 
     function buildSuggestionBox(suggestions) {
         var list = document.createElement('ul'),
@@ -107,20 +123,20 @@ function InputSuggestions(inputID, list) {
     }
     
     this.initialize = function () {
-        var parent;
+        var trueOffset;
         
         html = document.getElementsByTagName('html')[0];
         input = document.getElementById(self.inputID);
-        parent = input.parentNode;
+        trueOffset = getInputOffset();
 
         // turn off the browser's autocomplete menu so ours can shine through
         input.setAttribute('autocomplete', 'off');
 
-        suggestionBox.setAttribute('id', 'suggestion');
+        suggestionBox.id = 'suggestion';
         suggestionBox.style.minWidth = (input.offsetWidth - 2) + 'px'; // -2px for border
-        suggestionBox.style.left = input.offsetLeft + 'px';
-        suggestionBox.style.top = input.offsetTop + input.offsetHeight + 'px';
-        parent.insertBefore(suggestionBox, input.nextSibling);
+        suggestionBox.style.left = trueOffset[0] + 'px';
+        suggestionBox.style.top = trueOffset[1] + input.offsetHeight + 'px';
+        document.body.appendChild(suggestionBox);
 
         addEvent(input, 'keydown', function (e) {
             var key = e ? e.keyCode : window.event.keyCode;
