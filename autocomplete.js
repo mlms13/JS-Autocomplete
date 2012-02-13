@@ -21,12 +21,10 @@ function InputSuggestions(settings) {
             posLeft = 0,
             posTop = 0;
 
-        console.log(input.offsetLeft);
         if (curInput.offsetParent) {
             while (curInput) {
                 posLeft += curInput.offsetLeft;
                 posTop += curInput.offsetTop;
-                console.log('Position left is: ' + posLeft);
                 curInput = curInput.offsetParent;
             }
         }
