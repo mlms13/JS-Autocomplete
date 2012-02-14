@@ -41,12 +41,12 @@ function InputSuggestions(settings) {
             i = 0;
 
         // always empty the suggestion box to remove any existing suggestions
-        if (suggestionBox.hasChildNodes()) {
-            suggestionBox.removeChild(suggestionBox.getElementsByTagName('ul')[0]);
+        while (suggestionBox.hasChildNodes()) {
+            suggestionBox.removeChild(suggestionBox.lastChild);
         }
 
-        // if there are no suggestions or too many suggestion, return
-        if (suggestions.length < 1 || suggestions.length > self.maxItems) {
+        // if there are no suggestions, return
+        if (suggestions.length < 1) {
             return;
         }
 
@@ -76,7 +76,7 @@ function InputSuggestions(settings) {
             };
         }
 
-        for (i = 0; i < suggestions.length; i++) {
+        for (i = 0; i < suggestions.length && i < self.maxItems; i++) {
             item = document.createElement('li');
             item.appendChild(document.createTextNode(suggestions[i]));
             item.onmouseover = makeHoverHandler(i);
@@ -86,6 +86,16 @@ function InputSuggestions(settings) {
         }
 
         suggestionBox.appendChild(list);
+
+        if (suggestions.length > self.maxItems) {
+            item = document.createElement('p');
+            item.className = 'more-results-note';
+            item.appendChild(
+                document.createTextNode('and ' + (suggestions.length - self.maxItems) + ' more items...')
+            );
+            suggestionBox.appendChild(item);
+        }
+
         suggestionBox.style.display = "block";
     }
 
