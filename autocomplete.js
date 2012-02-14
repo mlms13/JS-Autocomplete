@@ -28,7 +28,7 @@ function InputSuggestions(settings) {
                 curInput = curInput.offsetParent;
             }
         }
-        return [posLeft, posTop];
+        return {left: posLeft, top: posTop};
     }
     function closeSuggestionBox() {
         suggestionBox.style.display = "none";
@@ -37,6 +37,7 @@ function InputSuggestions(settings) {
 
     function buildSuggestionBox(suggestions) {
         var list = document.createElement('ul'),
+            trueOffset = getInputOffset(),
             item,
             i = 0;
 
@@ -96,6 +97,9 @@ function InputSuggestions(settings) {
             suggestionBox.appendChild(item);
         }
 
+        suggestionBox.style.minWidth = (input.offsetWidth - 2) + 'px'; // -2px for border
+        suggestionBox.style.left = trueOffset.left + 'px';
+        suggestionBox.style.top = trueOffset.top + input.offsetHeight + 'px';
         suggestionBox.style.display = "block";
     }
 
@@ -140,19 +144,13 @@ function InputSuggestions(settings) {
     }
 
     this.initialize = function () {
-        var trueOffset;
-
         html = document.getElementsByTagName('html')[0];
         input = document.getElementById(self.inputID);
-        trueOffset = getInputOffset();
 
         // turn off the browser's autocomplete menu so ours can shine through
         input.setAttribute('autocomplete', 'off');
 
         suggestionBox.id = 'suggestion';
-        suggestionBox.style.minWidth = (input.offsetWidth - 2) + 'px'; // -2px for border
-        suggestionBox.style.left = trueOffset[0] + 'px';
-        suggestionBox.style.top = trueOffset[1] + input.offsetHeight + 'px';
         document.body.appendChild(suggestionBox);
 
         addEvent(input, 'keydown', function (e) {
