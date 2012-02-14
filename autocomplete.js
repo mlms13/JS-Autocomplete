@@ -40,14 +40,16 @@ function InputSuggestions(settings) {
             item,
             i = 0;
 
+        // always empty the suggestion box to remove any existing suggestions
+        if (suggestionBox.hasChildNodes()) {
+            suggestionBox.removeChild(suggestionBox.getElementsByTagName('ul')[0]);
+        }
+
+        // if there are no suggestions or too many suggestion, return
         if (suggestions.length < 1 || suggestions.length > self.maxItems) {
             return;
         }
 
-        // empty the suggestion box to remove any existing suggestions
-        if (suggestionBox.hasChildNodes()) {
-            suggestionBox.removeChild(suggestionBox.getElementsByTagName('ul')[0]);
-        }
         function makeHoverHandler(index) {
             return function () {
                 var items = suggestionBox.getElementsByTagName('li');
@@ -102,6 +104,10 @@ function InputSuggestions(settings) {
         var items = suggestionBox.getElementsByTagName('li'),
             nextIndex;
 
+        if (items.length < 1) {
+            return;
+        }
+
         if (selectedIndex > -1) {
             items[selectedIndex].className = items[selectedIndex].className.replace(' selected', '');
         }
@@ -147,7 +153,7 @@ function InputSuggestions(settings) {
                 buildSuggestionBox(getFilteredItems(input.value)); // show suggestions if they aren't shown
                 changeSelection(key);
                 return false;
-            } else if (key === 13) { // return key should make a selection *if the box is open*
+            } else if (key === 13) { // return key should make a selection
                 makeKeyboardSelection();
 
                 // make sure the enter key doesn't submit the form
