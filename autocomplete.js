@@ -91,7 +91,7 @@ function InputSuggestions(settings) {
             item = document.createElement('p');
             item.className = 'more-results-note';
             item.appendChild(
-                document.createTextNode('and ' + (suggestions.length - self.maxItems) + ' more items...')
+                document.createTextNode('and ' + (suggestions.length - self.maxItems) + ' more results...')
             );
             suggestionBox.appendChild(item);
         }
